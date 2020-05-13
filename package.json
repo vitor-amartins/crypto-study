@@ -1,0 +1,22 @@
+{
+  "name": "crypto-study",
+  "version": "1.0.0",
+  "description": "Crypto Studying",
+  "main": "src/app.js",
+  "author": "Vitor Martins",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "moment": "^2.25.3",
+    "sucrase": "^3.14.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.3"
+  }
+}
