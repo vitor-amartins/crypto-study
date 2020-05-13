@@ -1,22 +1,20 @@
-import sha256 from 'crypto-js/sha256';
-
+import hashData from './hash-data';
 import mine from './mine';
 import getLastBlockHash from './get-last-block-hash';
 import appendBlock from './append-block';
 
 const difficulty = 3;
 const version = 1;
-const data = ['Mito Vartins'];
+const data = ['1 pedrinha para Vitor Martins'];
 
 (async () => {
   const hashPreviousBlock = await getLastBlockHash();
-  const hashData = sha256(data.join('')).toString();
 
   const blockMined = mine({
     header: {
       version,
       hashPreviousBlock,
-      hashData,
+      hashData: hashData({ data }),
     },
     data,
     difficulty,

@@ -12,18 +12,5 @@
     "data": [
       "Bloco Gênesis"
     ]
-  },
-  {
-    "headerHash": "00062484038ac9150b69fabeae80fb802c67c7e956d5f6e97f251f6083ae1eb1",
-    "header": {
-      "version": 1,
-      "hashData": "3280c6e5bca711296dd9da927cf036bd2e08784e745c190b23ca4b08d38a70eb",
-      "timestamp": 1589339057,
-      "difficulty": 3,
-      "nonce": 3707
-    },
-    "data": [
-      "Mito Vartins"
-    ]
   }
 ]
