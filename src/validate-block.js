@@ -13,6 +13,8 @@ const validateBlock = async ({ blockHash }) => {
     throw new Error('Invalid block');
   }
 
+  // TODO: Validate hash of previous block
+
   if (block.headerHash !== hash(block.header)) {
     throw new Error('Invalid block');
   }
