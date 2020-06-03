@@ -1,9 +1,9 @@
 import fs from 'fs';
 
 import hash from './hash';
-import hashData from './hash-data';
+import hashData from './utils/hash-data';
 
-const validateBlock = async ({ blockHash }) => {
+const validateBlockOnBlockchain = async ({ blockHash }) => {
   const fileData = await fs.readFileSync('src/blockchain.json');
   const blocks = JSON.parse(fileData);
 
@@ -22,4 +22,4 @@ const validateBlock = async ({ blockHash }) => {
   return true;
 };
 
-export default validateBlock;
+export default validateBlockOnBlockchain;

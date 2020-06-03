@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minerador</title>
+</head>
+<body>
+  <button type="button" onclick="mineBlock()">Minerar</button>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+  <script type="text/javascript">
+    const sha256 = async (message) => {
+      // encode as UTF-8
+      const msgBuffer = new TextEncoder('utf-8').encode(message);
+
+      // hash the message
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+      // convert ArrayBuffer to Array
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+      // convert bytes to hex string
+      const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+      return hashHex;
+    };
+
+    const HashBody = async (body) => await sha256(body.join(''));
+    const HashHeader = async ({
+      version, hashPreviousBlock, hashBody, timestamp, difficulty, nonce,
+    }) => {
+      const data = `${version}${hashPreviousBlock}${hashBody}${timestamp}${difficulty}${nonce}`;
+      return await sha256(nonce + data);
+    };
+    const mine = async ({ header, body }) => {
+      const regex = new RegExp(`^0{${header.difficulty}}`);
+
+      const hashBody = await HashBody(body);
+      let nonce = -1;
+      let result = '';
+      let timestamp;
+      let completeHeader = {};
+
+      do {
+        nonce += 1;
+        console.log(nonce);
+        timestamp = moment().unix();
+        completeHeader = {
+          difficulty: header.difficulty,
+          version: header.version,
+          nonce,
+          hashBody,
+          hashPreviousBlock: header.hashPreviousBlock,
+          timestamp,
+        };
+        result = await HashHeader(completeHeader);
+      } while (!result.match(regex));
+
+      return {
+        headerHash: result,
+        header: completeHeader,
+        body,
+      };
+    };
+
+    const body = ['1 pedrinha para Vitor Martins'];
+    const difficulty = 1;
+    const version = 1;
+    const hashPreviousBlock = '05c3d7862a4adb188e7b85a000402dac882f3d42cbc542ba8f3f6c27ee9b82f0';
+    const block = {
+      header: {
+        difficulty,
+        version,
+        hashPreviousBlock,
+      },
+      body,
+    };
+
+    console.log('Block before', block);
+
+    const mineBlock = async () => {
+      const blockMined = await mine(block);
+      console.log('Block mined', blockMined);
+    };
+  </script>
+</body>
+</html>

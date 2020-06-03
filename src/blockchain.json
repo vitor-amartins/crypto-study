@@ -2,14 +2,14 @@
   {
     "headerHash": "05c3d7862a4adb188e7b85a000402dac882f3d42cbc542ba8f3f6c27ee9b82f0",
     "header": {
-      "version": 1,
-      "hashPreviousBlock": "0000000000000000000000000000000000000000000000000000000000000000",
-      "hashData": "9811dfa1f198a3d506a635de7d03ab0dfedae6b89a747cf36e048598a56d04ae",
-      "timestamp": 1589339004,
       "difficulty": 1,
-      "nonce": 0
+      "version": 1,
+      "nonce": 0,
+      "hashBody": "9811dfa1f198a3d506a635de7d03ab0dfedae6b89a747cf36e048598a56d04ae",
+      "hashPreviousBlock": "0000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": 1589339004
     },
-    "data": [
+    "body": [
       "Bloco Gênesis"
     ]
   }

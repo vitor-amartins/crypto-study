@@ -1,25 +1,19 @@
-import hashData from './hash-data';
-import mine from './mine';
-import getLastBlockHash from './get-last-block-hash';
-import appendBlock from './append-block';
+import mine from './utils/mine';
+import getLastBlockHash from './utils/get-last-block-hash';
+import { difficulty, version } from './constans';
 
-const difficulty = 3;
-const version = 1;
-const data = ['1 pedrinha para Vitor Martins'];
+const body = ['1 pedrinha para Vitor Martins'];
 
 (async () => {
   const hashPreviousBlock = await getLastBlockHash();
 
-  const blockMined = mine({
+  const blockMined = await mine({
     header: {
+      difficulty,
       version,
       hashPreviousBlock,
-      hashData: hashData({ data }),
     },
-    data,
-    difficulty,
+    body,
   });
   console.log('[app]', blockMined);
-
-  await appendBlock({ block: blockMined });
 })();
